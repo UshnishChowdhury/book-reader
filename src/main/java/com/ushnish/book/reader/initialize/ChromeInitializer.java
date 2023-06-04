@@ -11,9 +11,9 @@ public class ChromeInitializer {
 
 	public WebDriver initialize() throws MalformedURLException {
 		ChromeOptions chromeOptions = new ChromeOptions();
-		chromeOptions.setCapability("browserVersion", "67");
-		chromeOptions.setCapability("platformName", "Windows XP");
-		WebDriver driver = new RemoteWebDriver(new URL("http://www.example.com"), chromeOptions);
+		chromeOptions.setCapability("browserVersion", "113.0");
+		chromeOptions.setCapability("platformName", "linux");
+		WebDriver driver = new RemoteWebDriver(new URL(""), chromeOptions);
 		return driver;
 	}
 
