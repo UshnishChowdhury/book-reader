@@ -13,7 +13,7 @@ public class ChromeInitializer {
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.setCapability("browserVersion", "113.0");
 		chromeOptions.setCapability("platformName", "linux");
-		WebDriver driver = new RemoteWebDriver(new URL(""), chromeOptions);
+		WebDriver driver = new RemoteWebDriver(new URL(System.getenv("SELENIUM_REMOTE_DRIVER")), chromeOptions);
 		return driver;
 	}
 
