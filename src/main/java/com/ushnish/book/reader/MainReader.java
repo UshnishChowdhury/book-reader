@@ -3,6 +3,7 @@ package com.ushnish.book.reader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
@@ -28,11 +29,12 @@ public class MainReader {
 		pageLoader.loadPage(requiredDriver);
 		pageLoader.signIn(requiredDriver);
 		bookPageLoader.goToBook(requiredDriver);
-		// String pageContent = bookPageLoader.getPageContent(requiredDriver);
+		Path bookPath = utils.makeBookDirectory("The Handbook of Public Sector Communication");
+		
 		Pdf pdf = ((PrintsPage) requiredDriver).print(new PrintOptions());
 		Files.write(Paths.get("./trial.pdf"), OutputType.BYTES.convertFromBase64Png(pdf.getContent()),
 				StandardOpenOption.CREATE);
-		// utils.writeLines(pageContent, "The Handbook of Public Sector Communication");
+		
 		pageLoader.stopDriver(requiredDriver);
 	}
 }
