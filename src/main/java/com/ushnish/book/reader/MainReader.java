@@ -24,32 +24,8 @@ import com.ushnish.book.reader.utils.PageUtils;
 public class MainReader {
 
 	public static void main(String args[]) throws InterruptedException, FileNotFoundException, IOException {
-		ChromeInitializer initializer = new ChromeInitializer();
-		PageLoader pageLoader = new PageLoader();
-		BookPageLoader bookPageLoader = new BookPageLoader();
 		PageUtils utils = new PageUtils();
-		Printer pagePrinter = new Printer();
-		int fileNumber = 1;
-
-		/*
-		 * WebDriver requiredDriver = initializer.initialize();
-		 * pageLoader.loadPage(requiredDriver); pageLoader.signIn(requiredDriver);
-		 * bookPageLoader.goToBook(requiredDriver);
-		 */
-
-		Path bookPath = utils.makeBookDirectory("Trial");
-		/*
-		 * Pdf pdf = utils.printPdf(requiredDriver); pagePrinter.printPage(pdf,
-		 * fileNumber, bookPath);
-		 * 
-		 * WebElement nextPage = bookPageLoader.getNextTopic(requiredDriver); while
-		 * (nextPage != null) { nextPage.click(); Thread.sleep(30000); fileNumber++; pdf
-		 * = utils.printPdf(requiredDriver); pagePrinter.printPage(pdf, fileNumber,
-		 * bookPath); Thread.sleep(10000); nextPage =
-		 * bookPageLoader.getNextTopic(requiredDriver); }
-		 * 
-		 * pageLoader.stopDriver(requiredDriver);
-		 */
+		Path bookPath = utils.makeBookDirectory("The Handbook of Public Sector Communication");
 		String absolutePathOfFiles = bookPath.toAbsolutePath().toString().replace("\\.", "");
 		File folder = new File(absolutePathOfFiles);
 		File[] listOfFiles = folder.listFiles();
@@ -57,29 +33,30 @@ public class MainReader {
 			@Override
 			public int compare(File firstFile, File secondFile) {
 				int n1 = extractNumber(firstFile.getName());
-                int n2 = extractNumber(secondFile.getName());
-                return n1 - n2;
+				int n2 = extractNumber(secondFile.getName());
+				return n1 - n2;
 			}
+
 			private int extractNumber(String name) {
-                int i = 0;
-                try {
-                    int e = name.lastIndexOf('.');
-                    String number = name.substring(0, e);
-                    i = Integer.parseInt(number);
-                } catch(Exception e) {
-                    i = 0;
-                }
-                return i;
-            }
+				int i = 0;
+				try {
+					int e = name.lastIndexOf('.');
+					String number = name.substring(0, e);
+					i = Integer.parseInt(number);
+				} catch (Exception e) {
+					i = 0;
+				}
+				return i;
+			}
 		});
-		
+
 		PDFMergerUtility pdfMerger = new PDFMergerUtility();
-		pdfMerger.setDestinationFileName(absolutePathOfFiles + "\\merged.pdf");
+		pdfMerger.setDestinationFileName(absolutePathOfFiles + "\\The Handbook of Public Sector Communication.pdf");
 		for (File file : listOfFiles) {
 			System.out.println("File Name: " + file.getName());
 			pdfMerger.addSource(file);
 		}
-		
+
 		pdfMerger.mergeDocuments(null);
 	}
 }

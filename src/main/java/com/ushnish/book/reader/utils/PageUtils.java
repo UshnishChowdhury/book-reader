@@ -2,6 +2,7 @@ package com.ushnish.book.reader.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -16,7 +17,8 @@ public class PageUtils {
 		bookName = "./".concat(bookName);
 		Path path = Paths.get(bookName);
 		try {
-			Files.createDirectories(path);
+			if (Files.notExists(path, LinkOption.NOFOLLOW_LINKS))
+				Files.createDirectories(path);
 			System.out.println("Directory created successfully: " + path.toString());
 		} catch (IOException e) {
 			System.err.println("Failed to create directory!" + e.getMessage());
@@ -29,7 +31,7 @@ public class PageUtils {
 		Pdf pdf = ((PrintsPage) driver).print(new PrintOptions());
 		return pdf;
 	}
-	
+
 	public String generatePdfFileName(Path path, int fileNumber) {
 		return path.toString() + "/" + fileNumber + ".pdf";
 	}
