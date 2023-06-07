@@ -31,7 +31,7 @@ public class PageUtils {
 	}
 	
 	public String generatePdfFileName(Path path, int fileNumber) {
-		
+		return path.toString() + "/" + fileNumber + ".pdf";
 	}
 
 }
