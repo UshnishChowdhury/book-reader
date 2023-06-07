@@ -25,13 +25,15 @@ public class MainReader {
 		PageLoader pageLoader = new PageLoader();
 		BookPageLoader bookPageLoader = new BookPageLoader();
 		PageUtils utils = new PageUtils();
+		
 		WebDriver requiredDriver = initializer.initialize();
 		pageLoader.loadPage(requiredDriver);
 		pageLoader.signIn(requiredDriver);
 		bookPageLoader.goToBook(requiredDriver);
-		Path bookPath = utils.makeBookDirectory("The Handbook of Public Sector Communication");
 		
-		Pdf pdf = ((PrintsPage) requiredDriver).print(new PrintOptions());
+		Path bookPath = utils.makeBookDirectory("The Handbook of Public Sector Communication");
+		Pdf pdf = utils.printPdf(requiredDriver);
+		
 		Files.write(Paths.get("./trial.pdf"), OutputType.BYTES.convertFromBase64Png(pdf.getContent()),
 				StandardOpenOption.CREATE);
 		
