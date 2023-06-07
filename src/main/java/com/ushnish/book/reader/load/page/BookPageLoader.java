@@ -14,11 +14,6 @@ public class BookPageLoader {
 		System.out.println("Book loaded successfully");
 	}
 
-	public String getPageContent(WebDriver driver) {
-		WebElement mainPageElement = driver.findElement(By.id("book-content"));
-		return mainPageElement.getText();
-	}
-
 	public WebElement getNextTopic(WebDriver driver) {
 		WebElement nextTopicLink = null;
 		PageLoader pageLoader = new PageLoader();
