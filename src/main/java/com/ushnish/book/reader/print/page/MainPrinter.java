@@ -51,7 +51,7 @@ public class MainPrinter {
 
 			Pdf pdf = utils.printPdf(requiredDriver);
 			pagePrinter.printPage(pdf, fileNumber, bookPath);
-
+			
 			WebElement nextPage = bookPageLoader.getNextTopic(requiredDriver);
 			while (nextPage != null) {
 				nextPage.click();
