@@ -35,5 +35,8 @@ public class PageUtils {
 	public String generatePdfFileName(Path path, int fileNumber) {
 		return path.toString() + "/" + fileNumber + ".pdf";
 	}
-
+	
+	public void waitForProcess(int milliseconds) throws InterruptedException {
+		Thread.sleep(milliseconds);
+	}
 }

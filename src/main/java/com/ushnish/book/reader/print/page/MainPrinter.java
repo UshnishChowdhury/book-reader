@@ -12,12 +12,33 @@ import com.ushnish.book.reader.load.page.PageLoader;
 import com.ushnish.book.reader.utils.PageUtils;
 
 public class MainPrinter {
+
+	private ChromeInitializer getChormeInitializer() {
+		return new ChromeInitializer();
+	}
+
+	private PageLoader getPageLoader() {
+		return new PageLoader();
+	}
+
+	private BookPageLoader getBookPageLoader() {
+		return new BookPageLoader();
+	}
+
+	private PageUtils getPageUtils() {
+		return new PageUtils();
+	}
+
+	private Printer getPrinter() {
+		return new Printer();
+	}
+
 	public void printRequiredPages() {
-		ChromeInitializer initializer = new ChromeInitializer();
-		PageLoader pageLoader = new PageLoader();
-		BookPageLoader bookPageLoader = new BookPageLoader();
-		PageUtils utils = new PageUtils();
-		Printer pagePrinter = new Printer();
+		ChromeInitializer initializer = getChormeInitializer();
+		PageLoader pageLoader = getPageLoader();
+		BookPageLoader bookPageLoader = getBookPageLoader();
+		PageUtils utils = getPageUtils();
+		Printer pagePrinter = getPrinter();
 		int fileNumber = 1;
 
 		try {
@@ -34,17 +55,17 @@ public class MainPrinter {
 			WebElement nextPage = bookPageLoader.getNextTopic(requiredDriver);
 			while (nextPage != null) {
 				nextPage.click();
-				Thread.sleep(30000);
+				utils.waitForProcess(20000);
 				fileNumber++;
 				pdf = utils.printPdf(requiredDriver);
 				pagePrinter.printPage(pdf, fileNumber, bookPath);
-				Thread.sleep(10000);
+				utils.waitForProcess(10000);
 				nextPage = bookPageLoader.getNextTopic(requiredDriver);
 			}
 
 			pageLoader.stopDriver(requiredDriver);
 		} catch (Exception e) {
-
+			System.out.println("Exception occured: " + e.getMessage());
 		}
 	}
 }

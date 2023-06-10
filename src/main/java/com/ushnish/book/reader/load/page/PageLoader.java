@@ -5,8 +5,6 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import io.opentelemetry.exporter.logging.SystemOutLogRecordExporter;
-
 public class PageLoader {
 
 	public void loadPage(WebDriver driver) {
