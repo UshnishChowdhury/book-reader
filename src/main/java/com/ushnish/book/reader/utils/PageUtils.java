@@ -61,8 +61,8 @@ public class PageUtils {
 				int i = 0;
 				try {
 					int endPoint = name.lastIndexOf('.');
-					String number = name.substring(0, endPoint);
-					i = Integer.parseInt(number);
+					String pageNumber = name.substring(0, endPoint);
+					i = Integer.parseInt(pageNumber);
 				} catch (Exception e) {
 					i = 0;
 				}
