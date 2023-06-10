@@ -33,25 +33,25 @@ public class MainPrinter {
 		return new Printer();
 	}
 
-	public void printRequiredPages() {
+	public void printRequiredPages(String bookName) {
 		ChromeInitializer initializer = getChormeInitializer();
 		PageLoader pageLoader = getPageLoader();
 		BookPageLoader bookPageLoader = getBookPageLoader();
 		PageUtils utils = getPageUtils();
 		Printer pagePrinter = getPrinter();
 		int fileNumber = 1;
-
+		WebDriver requiredDriver = null;
 		try {
-			WebDriver requiredDriver = initializer.initialize();
+			requiredDriver = initializer.initialize();
 			pageLoader.loadPage(requiredDriver);
 			pageLoader.signIn(requiredDriver);
-			bookPageLoader.goToBook(requiredDriver);
+			bookPageLoader.goToBook(requiredDriver, bookName);
 
-			Path bookPath = utils.makeBookDirectory("Trial");
+			Path bookPath = utils.makeBookDirectory(bookName);
 
 			Pdf pdf = utils.printPdf(requiredDriver);
 			pagePrinter.printPage(pdf, fileNumber, bookPath);
-			
+
 			WebElement nextPage = bookPageLoader.getNextTopic(requiredDriver);
 			while (nextPage != null) {
 				nextPage.click();
@@ -62,10 +62,11 @@ public class MainPrinter {
 				utils.waitForProcess(10000);
 				nextPage = bookPageLoader.getNextTopic(requiredDriver);
 			}
-
+			System.out.println("All pages of the book printed successfully of the book: " + bookName);
 			pageLoader.stopDriver(requiredDriver);
 		} catch (Exception e) {
 			System.out.println("Exception occured: " + e.getMessage());
+			pageLoader.stopDriver(requiredDriver);
 		}
 	}
 }

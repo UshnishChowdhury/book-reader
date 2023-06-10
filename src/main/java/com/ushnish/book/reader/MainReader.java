@@ -18,10 +18,15 @@ import org.openqa.selenium.WebElement;
 import com.ushnish.book.reader.initialize.ChromeInitializer;
 import com.ushnish.book.reader.load.page.BookPageLoader;
 import com.ushnish.book.reader.load.page.PageLoader;
+import com.ushnish.book.reader.print.page.MainPrinter;
 import com.ushnish.book.reader.print.page.Printer;
 import com.ushnish.book.reader.utils.PageUtils;
 
 public class MainReader {
+	
+	private MainPrinter getMainPrinter() {
+		return new MainPrinter();
+	}
 
 	public static void main(String args[]) throws InterruptedException, FileNotFoundException, IOException {
 		PageUtils utils = new PageUtils();

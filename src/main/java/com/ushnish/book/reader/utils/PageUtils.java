@@ -1,10 +1,13 @@
 package com.ushnish.book.reader.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import org.openqa.selenium.Pdf;
 import org.openqa.selenium.PrintsPage;
@@ -38,5 +41,34 @@ public class PageUtils {
 	
 	public void waitForProcess(int milliseconds) throws InterruptedException {
 		Thread.sleep(milliseconds);
+	}
+	
+	public String getAbsolutePathOfBookDirectory(Path bookPath) {
+		String absolutePathOfFiles = bookPath.toAbsolutePath().toString().replace("\\.", "");
+		return absolutePathOfFiles;
+	}
+	
+	public File[] sortFiles(File[] listOfFiles) {
+		Arrays.sort(listOfFiles, new Comparator<File>() {
+			@Override
+			public int compare(File firstFile, File secondFile) {
+				int number1 = extractNumber(firstFile.getName());
+				int number2 = extractNumber(secondFile.getName());
+				return number1 - number2;
+			}
+
+			private int extractNumber(String name) {
+				int i = 0;
+				try {
+					int endPoint = name.lastIndexOf('.');
+					String number = name.substring(0, endPoint);
+					i = Integer.parseInt(number);
+				} catch (Exception e) {
+					i = 0;
+				}
+				return i;
+			}
+		});
+		return listOfFiles;
 	}
 }
