@@ -13,9 +13,13 @@ public class PdfPageMerger {
 	private PageUtils getPageUtils() {
 		return new PageUtils();
 	}
-	
+
 	private File createFolder(String absolutePathOfPrintedPages) {
 		return new File(absolutePathOfPrintedPages);
+	}
+
+	private PDFMergerUtility getPDFMergerUtility() {
+		return new PDFMergerUtility();
 	}
 
 	public void mergeAllPages(String bookName) throws IOException {
@@ -25,14 +29,22 @@ public class PdfPageMerger {
 		File folder = createFolder(absolutePathOfFiles);
 		File[] listOfFiles = utils.sortFiles(folder.listFiles());
 
-		PDFMergerUtility pdfMerger = new PDFMergerUtility();
-		pdfMerger.setDestinationFileName(absolutePathOfFiles + "\\The Handbook of Public Sector Communication.pdf");
+		mergePdfFiles(absolutePathOfFiles, listOfFiles, bookName);
+	}
+
+	public void mergePdfFiles(String absolutePathOfFiles, File[] listOfFiles, String bookName) throws IOException {
+		PDFMergerUtility pdfMerger = getPDFMergerUtility();
+		pdfMerger.setDestinationFileName(absolutePathOfFiles + setMergedFileName(bookName));
 		for (File file : listOfFiles) {
 			System.out.println("File Name: " + file.getName());
 			pdfMerger.addSource(file);
 		}
 
 		pdfMerger.mergeDocuments(null);
+	}
+
+	public String setMergedFileName(String bookName) {
+		return "\\" + bookName + ".pdf";
 	}
 
 }
