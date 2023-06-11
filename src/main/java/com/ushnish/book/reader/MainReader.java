@@ -8,7 +8,7 @@ import com.ushnish.book.reader.print.page.MainPrinter;
 
 public class MainReader {
 	
-	public static String bookName = "Extreme Programming Explained";
+	public static String bookName = "Managerialism in the Public Sector";
 
 	private static MainPrinter getMainPrinter() {
 		return new MainPrinter();

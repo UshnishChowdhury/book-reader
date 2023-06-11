@@ -32,22 +32,23 @@ public class PageUtils {
 
 	public Pdf printPdf(WebDriver driver) {
 		Pdf pdf = ((PrintsPage) driver).print(new PrintOptions());
+		System.out.println("PDF printed successfully: " + driver.getTitle());
 		return pdf;
 	}
 
 	public String generatePdfFileName(Path path, int fileNumber) {
 		return path.toString() + "/" + fileNumber + ".pdf";
 	}
-	
+
 	public void waitForProcess(int milliseconds) throws InterruptedException {
 		Thread.sleep(milliseconds);
 	}
-	
+
 	public String getAbsolutePathOfBookDirectory(Path bookPath) {
 		String absolutePathOfFiles = bookPath.toAbsolutePath().toString().replace("\\.", "");
 		return absolutePathOfFiles;
 	}
-	
+
 	public File[] sortFiles(File[] listOfFiles) {
 		Arrays.sort(listOfFiles, new Comparator<File>() {
 			@Override

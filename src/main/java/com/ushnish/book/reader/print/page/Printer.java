@@ -13,11 +13,16 @@ import com.ushnish.book.reader.utils.PageUtils;
 
 public class Printer {
 
+	private PageUtils getPageUtils() {
+		return new PageUtils();
+	}
+
 	public void printPage(Pdf pdfFile, int fileNumber, Path path) throws IOException {
-		PageUtils utils = new PageUtils();
+		PageUtils utils = getPageUtils();
 		String generatedFileName = utils.generatePdfFileName(path, fileNumber);
 		Files.write(Paths.get(generatedFileName), OutputType.BYTES.convertFromBase64Png(pdfFile.getContent()),
 				StandardOpenOption.CREATE);
+		System.out.println("File printed successfully : " + generatedFileName);
 	}
 
 }
