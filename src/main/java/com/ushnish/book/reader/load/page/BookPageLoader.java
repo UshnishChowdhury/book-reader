@@ -16,12 +16,10 @@ public class BookPageLoader {
 
 	public WebElement getNextTopic(WebDriver driver) {
 		WebElement nextTopicLink = null;
-		PageLoader pageLoader = new PageLoader();
 		try {
 			nextTopicLink = driver.findElement(By.xpath("/html/body/div[1]/main/section/div/nav/section/div[3]/a"));
 		} catch (NoSuchElementException e) {
 			System.out.println("Element not found: " + e.getMessage());
-			pageLoader.stopDriver(driver);
 		}
 		return nextTopicLink;
 	}

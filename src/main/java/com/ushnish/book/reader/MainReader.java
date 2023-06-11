@@ -7,6 +7,8 @@ import com.ushnish.book.reader.page.merge.PdfPageMerger;
 import com.ushnish.book.reader.print.page.MainPrinter;
 
 public class MainReader {
+	
+	public static String bookName = "Extreme Programming Explained";
 
 	private static MainPrinter getMainPrinter() {
 		return new MainPrinter();
@@ -18,8 +20,8 @@ public class MainReader {
 
 	public static void main(String args[]) throws InterruptedException, FileNotFoundException, IOException {
 		MainPrinter printPages = getMainPrinter();
-		printPages.printRequiredPages("");
+		printPages.printRequiredPages(bookName);
 		PdfPageMerger pdfMerger = getPdfPageMerger();
-		pdfMerger.mergeAllPages("");
+		pdfMerger.mergeAllPages(bookName);
 	}
 }
