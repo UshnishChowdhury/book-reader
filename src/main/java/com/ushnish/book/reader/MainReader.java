@@ -7,8 +7,8 @@ import com.ushnish.book.reader.page.merge.PdfPageMerger;
 import com.ushnish.book.reader.print.page.MainPrinter;
 
 public class MainReader {
-	
-	public static String bookName = "Managerialism in the Public Sector";
+
+	public static String bookName = "Cyber Security Policy Guidebook";
 
 	private static MainPrinter getMainPrinter() {
 		return new MainPrinter();

@@ -45,6 +45,8 @@ public class MainPrinter {
 			requiredDriver = initializer.initialize();
 			pageLoader.loadPage(requiredDriver);
 			pageLoader.signIn(requiredDriver);
+			
+			bookPageLoader.clickViewAll(requiredDriver);
 			bookPageLoader.goToBook(requiredDriver, bookName);
 
 			Path bookPath = utils.makeBookDirectory(bookName);

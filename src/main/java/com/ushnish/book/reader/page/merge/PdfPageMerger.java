@@ -36,11 +36,11 @@ public class PdfPageMerger {
 		PDFMergerUtility pdfMerger = getPDFMergerUtility();
 		pdfMerger.setDestinationFileName(absolutePathOfFiles + setMergedFileName(bookName));
 		for (File file : listOfFiles) {
-			System.out.println("File Name: " + file.getName());
 			pdfMerger.addSource(file);
+			System.out.println("File added for merging: " + file.getName());
 		}
-
 		pdfMerger.mergeDocuments(null);
+		System.out.println("Merging Successful...");
 	}
 
 	public String setMergedFileName(String bookName) {
